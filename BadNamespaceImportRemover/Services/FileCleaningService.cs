@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Linq;
 using System.IO;
 
@@ -37,7 +35,7 @@ namespace BadNamespaceImportRemover.Services
 
         string GetUsingDirectiveFromImportName(string import)
         {
-            return $"using {import};{Environment.NewLine}";
+            return $"using {import};\n";
         }
     }
 }
