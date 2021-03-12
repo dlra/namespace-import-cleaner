@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 
@@ -12,11 +10,7 @@ namespace BadNamespaceImportRemover.Services
         bool isRecursive;
         List<string> filesOfInterestPaths = new List<string>();
 
-        public FileLocatorService(bool isRecursive, params string[] directoriesOfInterest) :
-            this(directoriesOfInterest, isRecursive)
-        { }
-
-        public FileLocatorService(IEnumerable<string> directoriesOfInterest, bool isRecursive)
+        public FileLocatorService(bool isRecursive, params string[] directoriesOfInterest)
         {
             this.directoriesOfInterest = new List<string>(directoriesOfInterest);
             this.isRecursive = isRecursive;
