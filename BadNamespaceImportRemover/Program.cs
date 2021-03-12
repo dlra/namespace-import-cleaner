@@ -85,7 +85,7 @@ namespace BadNamespaceImportRemover
             {
                 Console.WriteLine("Search for files recursively? (Y/N)");
                 keyPress = Console.ReadKey();
-            } while (IsValidKeyPress());
+            } while (!IsValidKeyPress());
         }
 
         static bool IsValidKeyPress()
