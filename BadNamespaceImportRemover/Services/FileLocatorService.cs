@@ -6,26 +6,32 @@ namespace BadNamespaceImportRemover.Services
 {
     public class FileLocatorService
     {
-        readonly List<string> directoriesOfInterest;
-        bool isRecursive;
+        readonly List<string> subDirectoriesOfInterest;
+        readonly bool isRecursive;
+        readonly string directoryPath;
         List<string> filesOfInterestPaths = new List<string>();
 
-        public FileLocatorService(bool isRecursive, params string[] directoriesOfInterest)
+        public FileLocatorService(
+            bool isRecursive,
+            string directoryPath,
+            params string[] subDirectoriesOfInterest)
         {
-            this.directoriesOfInterest = new List<string>(directoriesOfInterest);
+            this.subDirectoriesOfInterest = new List<string>(subDirectoriesOfInterest);
             this.isRecursive = isRecursive;
+            this.directoryPath = directoryPath;
         }
 
         public IEnumerable<string> GetFilePaths()
         {
-            foreach (var directory in directoriesOfInterest)
+            foreach (var subDirectory in subDirectoriesOfInterest)
             {
-                var filePaths = Directory.EnumerateFiles(directory, ".cs", new EnumerationOptions { RecurseSubdirectories = isRecursive });
+                var subDirectoryPath = $"{directoryPath}\\{subDirectory}";
+                var filePaths = Directory.EnumerateFiles(subDirectoryPath, "*.cs", new EnumerationOptions { RecurseSubdirectories = isRecursive });
 
-                filesOfInterestPaths.AddRange(filePaths.Select(x => $"{directory}/{x}"));
+                filesOfInterestPaths.AddRange(filePaths);
             }
 
-            return filesOfInterestPaths
+            return filesOfInterestPaths;
         }
     }
 }

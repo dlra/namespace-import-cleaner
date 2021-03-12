@@ -24,7 +24,7 @@ namespace BadNamespaceImportRemover
             var removalsListFileReadingService = new FileReadingService(removalsListFilePath);
             var subDirectories = directoriesListFileReadingService.EnumerateLineItems();
             var removals = removalsListFileReadingService.EnumerateLineItems();
-            var locatorService = new FileLocatorService(isRecursive, subDirectories.ToArray());
+            var locatorService = new FileLocatorService(isRecursive, solutionDirectoryPath, subDirectories.ToArray());
             var paths = locatorService.GetFilePaths();
 
             foreach (var path in paths)
